@@ -1,0 +1,39 @@
+---
+interface Props { slug: string; increment?: boolean; }
+const { slug, increment = false } = Astro.props;
+---
+<span class="read-count" data-read-slug={slug} data-read-increment={increment ? 'true' : undefined} title="自统计功能上线起累计的打开次数，重复阅读也会计数">阅读统计加载中…</span>
+<script>
+async function loadReadCounts() {
+  const counters = [...document.querySelectorAll<HTMLElement>('[data-read-slug]')];
+  if (!counters.length) return;
+  const article = counters.find(el => el.dataset.readIncrement === 'true');
+  const setCount = (el: HTMLElement, value: unknown) => {
+    el.textContent = typeof value === 'number' && Number.isSafeInteger(value) && value >= 0
+      ? `${value.toLocaleString('zh-CN')} 次阅读` : '阅读统计暂不可用';
+  };
+  try {
+    const response = await fetch('/api/views', article ? {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: article.dataset.readSlug }),
+      signal: AbortSignal.timeout(8000),
+    } : { signal: AbortSignal.timeout(8000) });
+    if (!response.ok) throw new Error('Statistics unavailable');
+    const data = await response.json();
+    for (const el of counters) setCount(el, article ? data.views : data.counts?.[el.dataset.readSlug!]);
+  } catch {
+    for (const el of counters) el.textContent = '阅读统计暂不可用';
+  }
+}
+// Background tabs are counted when first shown, not at preload time.
+if (document.visibilityState === 'visible') void loadReadCounts();
+else {
+  const onVisible = () => {
+    if (document.visibilityState === 'visible') {
+      document.removeEventListener('visibilitychange', onVisible);
+      void loadReadCounts();
+    }
+  };
+  document.addEventListener('visibilitychange', onVisible);
+}
+</script>

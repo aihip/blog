@@ -8,7 +8,7 @@
     "check": "node scripts/astro.mjs check",
     "build": "npm run check && node scripts/astro.mjs build",
     "preview": "node scripts/astro.mjs preview",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=pheth-blog"
+    "deploy": "npm run build && node scripts/deploy.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

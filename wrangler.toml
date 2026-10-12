@@ -1,3 +1,9 @@
 name = "pheth-blog"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-10-12"
+
+[[d1_databases]]
+binding = "VIEWS_DB"
+database_name = "pheth-blog-views"
+database_id = "9e88474c-3932-4d66-917f-00e24fa15d33"
+migrations_dir = "migrations"

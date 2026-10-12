@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS article_views (
+  slug TEXT PRIMARY KEY NOT NULL,
+  views INTEGER NOT NULL DEFAULT 0 CHECK (views >= 0)
+);

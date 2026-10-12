@@ -69,3 +69,29 @@ npm run deploy
 ## 特殊目录名
 
 当前工作目录包含字面量 `*`，会触发上游依赖的路径解析问题。脚本会自动复制到临时目录执行，构建完成后将 `dist` 同步回项目。在这种目录下开发预览为快照，修改后需重启；普通目录下仍支持正常热更新。
+
+## 文章阅读统计
+
+文章正文、首页列表、归档和标签列表显示累计阅读次数。正文在浏览器首次可见时请求一次计数；刷新或重新打开会再次累计，列表浏览不计数。因此它是阅读次数（PV），不是独立读者人数（UV），也不代表读完全文。功能上线之前的阅读量不补算。
+
+统计由 `functions/api/views.js` 和 Cloudflare D1 `pheth-blog-views` 提供；数据库仅保存文章 slug 和次数，不保存 IP、Cookie 或读者身份。计数使用原子 SQL，部署不会清零。改文件名会改变 slug，并从零开始；文章下线后不再展示旧计数。前端请求失败显示“阅读统计暂不可用”，不影响正文。
+
+只有构建清单 `post-slugs.json` 中的已发布文章允许计数，跨站请求及预览域名写入被拒绝。该公开计数接口不提供严格反刷，自动化脚本仍可能抬高计数，不能作为审计或结算数据。
+
+首次设置或新增数据库迁移：
+
+```sh
+npx wrangler d1 migrations apply pheth-blog-views --remote
+```
+
+部署继续使用 `npm run deploy`，部署脚本会让 Wrangler 编译根目录的 Pages Functions，并兼容项目路径中的字面量 `*`。`public/_routes.json` 仅让 `/api/views` 进入函数，其余页面继续静态服务。
+
+本地完整验证（使用本地数据库）：
+
+```sh
+npm run build
+npx wrangler d1 migrations apply pheth-blog-views --local
+npx wrangler pages dev dist
+```
+
+普通 `npm run dev` / `npm run preview` 仅提供 Astro 页面，不包含统计 API。接口测试使用 Node.js 24：`node --test tests/views.test.mjs`。

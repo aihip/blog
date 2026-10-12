@@ -7,3 +7,5 @@
 h1,.post-title,.prose h2{font-family:"Noto Serif SC","Songti SC",STSong,SimSun,serif;font-weight:500}h1{letter-spacing:2px}.eyebrow{font-family:inherit;letter-spacing:4px}.prose{line-height:2.15}.prose p{margin:22px 0}.intro{padding-top:86px;padding-bottom:76px}.intro p{line-height:2.15}.post-title{font-size:21px}.post-tags a{font-family:inherit}.note>span{font-family:serif}
 
 .empty-state{padding:32px 0 48px;color:var(--muted);font-size:14px;line-height:2}
+
+.read-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}.post-row .read-count{display:block;margin-top:12px}
