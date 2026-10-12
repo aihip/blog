@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getPosts} from '../../lib/posts';
+const posts=await getPosts(); const tags=[...new Set(posts.flatMap(p=>p.data.tags))];
+---
+<Base title="标签"><section class="page-heading"><div class="eyebrow">EXPLORE BY TOPIC</div><h1>按兴趣阅读<span class="accent">.</span></h1><p>从一个关键词，开始探索。</p></section>{tags.length === 0 && <p class="empty-state">写下文字之后，话题会在这里慢慢汇集。</p>}<div class="tag-cloud">{tags.map(tag=><a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}<span>{posts.filter(p=>p.data.tags.includes(tag)).length}</span></a>)}</div></Base>

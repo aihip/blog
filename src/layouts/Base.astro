@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title, description = '成年人的随想。关于生活、关系、时间，以及与自己相处的片刻。' } = Astro.props;
+const pageTitle = title ? `${title} · Pheth` : 'Pheth · 成年人的随想';
+const pathname = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+<title>{pageTitle}</title><meta name="description" content={description} />
+<link rel="canonical" href={new URL(pathname, Astro.site)} />
+<meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={new URL(pathname, Astro.site)} />
+<meta name="color-scheme" content="light dark" /><link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="alternate" type="application/rss+xml" title="Pheth RSS" href="/rss.xml" />
+<script is:inline>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<div class="shell">
+<header><a class="brand" href="/" aria-label="Pheth 首页"><span class="brand-symbol">p<span>.</span></span><span>pheth<span class="brand-slash"> / </span>blog</span></a><nav aria-label="主导航">{[['/', '文章'], ['/archives/', '归档'], ['/about/', '关于']].map(([url, label]) => <a href={url} aria-current={pathname === url ? 'page' : undefined}>{label}</a>)}<button id="theme-toggle" aria-label="切换深色模式" title="切换配色">◐</button></nav></header>
+<main id="main"><slot /></main>
+<footer><span>© {new Date().getFullYear()} Pheth <span class="footer-dot">·</span> 日子慢慢过，心事慢慢写。</span><div><a href="/rss.xml">RSS ↗</a><a href="/about/">关于这里 ↗</a></div></footer>
+</div>
+<script>
+const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
+const updateLabel = () => button?.setAttribute('aria-label', document.documentElement.dataset.theme === 'dark' ? '切换浅色模式' : '切换深色模式');
+updateLabel();
+button?.addEventListener('click', () => { const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = next; try { localStorage.setItem('theme', next); } catch {} updateLabel(); });
+</script>
+</body></html>
