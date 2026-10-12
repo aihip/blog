@@ -1,0 +1,26 @@
+{
+  "name": "pheth-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/astro.mjs dev",
+    "check": "node scripts/astro.mjs check",
+    "build": "npm run check && node scripts/astro.mjs build",
+    "preview": "node scripts/astro.mjs preview",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=pheth-blog"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.149.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
