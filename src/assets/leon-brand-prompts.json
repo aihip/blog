@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "leon_avatar",
+      "prompt": "Use case: stylized-concept. Asset type: square personal blog avatar, 1:1. Primary request: a cute, gentle interpretation of Laozi, the ancient Chinese Daoist sage. Subject: one kindly elderly Chinese sage, large rounded head, warm smiling crescent eyes, white eyebrows, flowing white moustache and long soft white beard, white hair in a simple traditional topknot with a plain wooden hairpin, simple loose pale sage-green Daoist robe. Head and shoulders, frontal three-quarter pose, centered and comfortably inside a circle-safe crop, whole hair bun visible. Style: refined storybook illustration, hand painted watercolor and gouache on subtle warm rice-paper texture, soft clear shapes, very appealing and calm, dignified and cute, not a realistic historical portrait. Background: clean warm ivory with a very subtle misty pale-green wash. Muted ink green, cream, soft earthy accents; gentle natural light. Strong readable silhouette at small avatar sizes. No text, no letters, no signature, no watermark, no border, no extra people or decorative symbols."
+    },
+    {
+      "key": "leon_background",
+      "prompt": "Use case: illustration-story. Asset type: wide personal blog cover/background illustration, landscape 16:9. Primary request: a peaceful Chinese Daoist-inspired mountain background accompanying a cute Laozi sage avatar. Style: refined storybook watercolor and gouache on subtle warm rice-paper texture, soft charming rounded forms, quiet and elegant. Scene: layers of pale misty mountains, a winding stream and a few gently curving old pine branches near the outer edges; delicate morning mist. Harmonious muted ink green, sage green and warm ivory, matching a paper-like Chinese personal blog. Composition: ample light uncluttered negative space across the central upper two-thirds for use as a background, scenic detail concentrated toward the lower edge and far edges; mountains diffuse into ivory fog. Wide continuous scene with no panels. Serene, friendly and contemplative atmosphere, restrained detail. No people, no text, no letters, no logos, no signature, no watermark, no modern objects."
+    }
+  ]
+}

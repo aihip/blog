@@ -7,3 +7,11 @@
 h1,.post-title,.prose h2{font-family:"Noto Serif SC","Songti SC",STSong,SimSun,serif;font-weight:500}h1{letter-spacing:2px}.eyebrow{font-family:inherit;letter-spacing:4px}.prose{line-height:2.15}.prose p{margin:22px 0}.intro{padding-top:86px;padding-bottom:76px}.intro p{line-height:2.15}.post-title{font-size:21px}.post-tags a{font-family:inherit}.note>span{font-family:serif}
 
 .empty-state{padding:32px 0 48px;color:var(--muted);font-size:14px;line-height:2}
+
+/* The sage portrait and landscape share the site's quiet paper palette. */
+.brand-avatar{display:block;width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+.intro{isolation:isolate}
+.intro-landscape{position:absolute;inset:16px -20px 24px;width:calc(100% + 40px);height:calc(100% - 40px);object-fit:cover;object-position:center;z-index:-2;opacity:.7;pointer-events:none;mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 82%,transparent)}
+.intro::before{content:'';position:absolute;inset:0 -20px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 5%,color-mix(in srgb,var(--bg) 90%,transparent) 38%,transparent 100%)}
+:root[data-theme=dark] .intro-landscape{opacity:.16}
+@media(max-width:640px){.brand-avatar{width:36px;height:36px}.intro-landscape{opacity:.45;object-position:65% center}}
